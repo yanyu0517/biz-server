@@ -1,0 +1,29 @@
+{
+  "name": "biz-server",
+  "version": "0.1.0",
+  "description": "biz mock server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node bin/start",
+    "test": "test"
+  },
+  "keywords": [
+    "biz",
+    "mock",
+    "http",
+    "server"
+  ],
+  "contributors": [
+  ],
+  "maintainers": [
+    {
+      "name": "Yan Yu",
+      "email": "yanyu0517@126.com"
+    }
+  ],
+  "dependencies": {
+    "http-server": "0.8.5"
+  },
+  "author": "yanyu",
+  "license": "BSD-2-Clause"
+}
