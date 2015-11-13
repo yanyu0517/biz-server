@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var server = require('../src/biz-server');
+
+
+function start(options){
+	server.startBizServer(options)
+}
+
+start();
