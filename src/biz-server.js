@@ -9,6 +9,7 @@ var colors = require('colors'),
   opener = require('opener'),
   director = require('director'),
   co = require('co'),
+  Mock = require('./mock'),
   thunkify = require('thunkify'),
   argv = require('optimist')
   .boolean('cors')
@@ -58,7 +59,6 @@ var port = argv.p || parseInt(process.env.PORT, 10),
   mockConfig = require(argv.m || process.cwd() + '/config/mockConfig.json'),
   logger;
 
-
 if (!argv.s && !argv.silent) {
   logger = {
     info: console.log,
@@ -86,6 +86,12 @@ if (!argv.s && !argv.silent) {
   };
 }
 
+var mock = new Mock({
+  as: as,
+  mockConfig: mockConfig,
+  logger: logger
+})
+
 if (!port) {
   portfinder.basePort = 8080;
   portfinder.getPort(function(err, port) {
@@ -110,7 +116,7 @@ function listen(port) {
     proxy: proxy,
     before: [
       function(req, res) {
-        var found = router.dispatch(req, res);
+        var found = mock.dispatch(req, res);
         if (!found) {
           res.emit('next');
         }
@@ -165,76 +171,6 @@ function listen(port) {
     }
   });
 }
-
-//router action
-if (typeof as == 'string') {
-  var suffix = as.split(',')
-  for (var i = 0; i < suffix.length; i++) {
-    var reg = '/(.*)' + suffix[i];
-    // router.post(/\/(.*).action/, function (path) {
-    //   console.log(arguments)
-    // });
-    router.post(new RegExp(reg), function(url) {
-      if (mockConfig) {
-        mockTo(url, this.res);
-      }
-    });
-  };
-}
-
-var success = false;
-
-function mockTo(url, res) {
-  co(function*() {
-    for (var i = 0; i < mockConfig.dataSource.length; i++) {
-      var result = yield getData(mockConfig.dataSource[i], url, res);
-      console.log('index = ' + i + 'result = ' + result)
-      if (result) {
-        return false;
-      } else if (!result && i == mockConfig.dataSource.length - 1) {
-        //最后一个仍然没有返回数据，那么则返回404
-        res.writeHead(404);
-        res.end('not found');
-      }
-    };
-    console.log('end')
-  }).catch(function(err) {
-    console.error(err.stack);
-    res.writeHead(404);
-    res.end(err.stack);
-  });
-}
-
-function getMockData(type, url, res, cb) {
-  var result = false;
-  switch (type) {
-    case 'json':
-      var pathStr = path.join(process.cwd(), mockConfig.json.path + url + (mockConfig.json.suffix || '.json'));
-      if (fs.existsSync(pathStr)) {
-        var data = fs.readFileSync(pathStr, 'utf-8'),
-          json = JSON.parse(data);
-        
-        if (mockConfig.json.wrap) {
-          if (json.enable) {
-            res.writeHead(200, {
-              'Content-Type': 'application/json'
-            })
-            res.end(JSON.stringify(json[json.value]));
-            result = true;
-          }
-        } else {
-          res.writeHead(200, {
-            'Content-Type': 'application/json'
-          })
-          res.end(data);
-          result = true;
-        }
-      }
-  }
-  cb(null, result);
-}
-
-var getData = thunkify(getMockData);
 
 if (process.platform === 'win32') {
   require('readline').createInterface({
