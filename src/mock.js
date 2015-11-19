@@ -71,7 +71,13 @@ Mock.prototype.getMockData = function(type, url, req, res, cb) {
                 res.end(data);
                 this.options.logger.request(req, res);
                 result = true;
-            } else {
+            }
+            break;
+        case 'online':
+            break;
+        case 'template':
+            var data = this.getTemplateData(url);
+            if (typeof data != 'undefined') {
                 res.writeHead(200, {
                     'Content-Type': 'application/json'
                 })
@@ -79,8 +85,6 @@ Mock.prototype.getMockData = function(type, url, req, res, cb) {
                 this.options.logger.request(req, res);
                 result = true;
             }
-            break;
-        case 'online':
             break;
     }
     cb(null, result);
@@ -106,7 +110,15 @@ Mock.prototype.getJsonData = function(url) {
 };
 
 Mock.prototype.getTemplateData = function(url) {
-    // body...
+    var pathStr = path.join(process.cwd(), this.options.mockConfig.template.path + url + '.template');
+    this.options.logger.info('Template data path is ' + pathStr);
+    if (fs.existsSync(pathStr)) {
+        var template = fs.readFileSync(pathStr, 'utf-8'),
+            data = MockJs.mock(new Function('return ' + template)());
+        return JSON.stringify(data);
+    } else {
+        this.options.logger.info("Can't find template data with the path '" + pathStr + "'")
+    }
 };
 
 module.exports = Mock;
