@@ -4,17 +4,12 @@ function startBizServer(argv){
   var colors = require('colors'),
     os = require('os'),
     httpServer = require('http-server'),
-    fs = require('fs'),
     path = require('path'),
     portfinder = require('portfinder'),
     opener = require('opener'),
-    director = require('director'),
-    co = require('co'),
-    Mock = require('./mock'),
-    thunkify = require('thunkify');
+    Mock = require('./mock');
 
-  var ifaces = os.networkInterfaces(),
-    router = new director.http.Router();
+  var ifaces = os.networkInterfaces();
 
   if (argv.h || argv.help) {
     console.log([
@@ -54,7 +49,7 @@ function startBizServer(argv){
     proxy = argv.P || argv.proxy,
     utc = argv.U || argv.utc,
     as = argv.as || '.action',
-    mockConfig = require(argv.m || path.join(process.cwd(), '/config/mockConfig.json')),
+    mockConfig,
     logger;
 
   if (!argv.s && !argv.silent) {
@@ -84,11 +79,23 @@ function startBizServer(argv){
     };
   }
 
-  var mock = new Mock({
-    as: as,
-    mockConfig: mockConfig,
-    logger: logger
-  })
+  var mockPath = path.join(process.cwd(), argv.m || '/config/mockConfig.json');
+  try{
+    mockConfig = require(mockPath);
+  } catch(e) {
+    var pathStr = 
+    logger.info("Can't find mock config file " + mockPath + ", mock feature isn't available");
+  }
+
+  //只有有mock配置文件，才执行mock功能
+  if(mockConfig){
+    var mock = new Mock({
+      as: as,
+      mockConfig: mockConfig,
+      logger: logger
+    })
+  }
+  
 
   if (!port) {
     portfinder.basePort = 8080;
@@ -114,8 +121,12 @@ function startBizServer(argv){
       proxy: proxy,
       before: [
         function(req, res) {
-          var found = mock.dispatch(req, res);
-          if (!found) {
+          if(mock){
+            var found = mock.dispatch(req, res);
+            if (!found) {
+              res.emit('next');
+            }
+          } else {
             res.emit('next');
           }
         }
