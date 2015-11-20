@@ -2,11 +2,12 @@
 
 'use strict';
 
-var server = require('../src/biz-server');
-
-
+var server = require('../src/biz-server'),
+    argv = require('optimist')
+    .boolean('cors')
+    .argv;
 function start(options){
 	server.startBizServer(options)
 }
 
-start();
+start(argv);

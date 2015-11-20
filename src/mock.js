@@ -7,7 +7,7 @@ var MockJs = require('mockjs'),
     co = require('co'),
     thunkify = require('thunkify'),
     router = new director.http.Router();
-
+    
 function Mock(options) {
     this.options = options || {};
     this.initRouter();
