@@ -1,0 +1,14 @@
+{
+    "mockType": 1,
+    "dataSource": ["template", "json", "online", "qa"],
+    "json": {
+        "path": "/mock/data/",
+        "wrap": false
+    },
+    "online": {
+
+    },
+    "template": {
+        "path": "/mock/template/"
+    }
+}

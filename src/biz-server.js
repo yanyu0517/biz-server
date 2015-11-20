@@ -207,3 +207,4 @@ function startBizServer(argv){
 }
 
 exports.startBizServer = startBizServer;
+exports.version = require('../package.json').version;
