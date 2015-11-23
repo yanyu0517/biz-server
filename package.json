@@ -2,7 +2,11 @@
   "name": "biz-server",
   "version": "0.1.0",
   "description": "biz mock server",
-  "main": "server.js",
+  "main": "/src/biz-server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yanyu0517/biz-server.git"
+  },
   "scripts": {
     "start": "node bin/start",
     "test": "test"
@@ -33,6 +37,7 @@
     "portfinder": "0.4.x",
     "thunkify": "^2.1.2"
   },
+  "preferGlobal": "true",
   "bin": {
     "biz-server": "./bin/http-server",
     "bs": "./bin/http-server"
