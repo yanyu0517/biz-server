@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * @ignore
+ */
+define(function(require) {
+<span id='bizui'>    /**
+</span>     * 命名空间
+     * @class bizui
+     * @singleton
+     */
+    var bizui = {};
+
+<span id='bizui-property-version'>    /**
+</span>     * @property {String} version 版本号
+     */
+    bizui.version = '1.1.4';
+
+    var origin = window.bizui;
+
+<span id='bizui-method-noConflict'>    /**
+</span>     * 获取无冲突bizui
+     * @return {Object} bizui
+     */
+    bizui.noConflict = function() {
+        window.bizui = origin;
+        return this;
+    };
+
+    $.extend(bizui, {
+<span id='bizui-method-Button'>        /**
+</span>         * {@link Button} constructor
+         * @method Button
+         */
+        Button: require('ui/Button'),
+
+<span id='bizui-method-Input'>        /**
+</span>         * {@link Input} constructor
+         * @method Input
+         */
+        Input: require('ui/Input'),
+
+<span id='bizui-method-Textarea'>        /**
+</span>         * {@link Textarea} constructor
+         * @method Textarea
+         */
+        Textarea: require('ui/Textarea'),
+
+<span id='bizui-method-Textline'>        /**
+</span>         * {@link Textline} constructor
+         * @method Textline
+         */
+        Textline: require('ui/Textline'),
+
+<span id='bizui-method-Radio'>        /**
+</span>         * {@link Radio} constructor
+         * @method Radio
+         */
+        Radio: require('ui/Radio'),
+
+<span id='bizui-method-Checkbox'>        /**
+</span>         * {@link Checkbox} constructor
+         * @method Checkbox
+         */
+        Checkbox: require('ui/Checkbox'),
+
+<span id='bizui-method-Select'>        /**
+</span>         * {@link Select} constructor
+         * @method Select
+         */
+        Select: require('ui/Select'),
+
+<span id='bizui-method-Dialog'>        /**
+</span>         * {@link Dialog} constructor
+         * @method Dialog
+         */
+        Dialog: require('ui/Dialog'),
+
+<span id='bizui-method-Panel'>        /**
+</span>         * {@link Panel} constructor
+         * @method Panel
+         */
+        Panel: require('ui/Panel'),
+
+<span id='bizui-method-Tooltip'>        /**
+</span>         * {@link Tooltip} method
+         * @method Tooltip
+         */
+        Tooltip: require('ui/Tooltip'),
+
+<span id='bizui-method-Tab'>        /**
+</span>         * {@link Tab} constructor
+         * @method Tab
+         */
+        Tab: require('ui/Tab'),
+
+<span id='bizui-method-Page'>        /**
+</span>         * {@link Page} constructor
+         * @method Page
+         */
+        Page: require('ui/Page'),
+
+<span id='bizui-method-Tree'>        /**
+</span>         * {@link Tree} constructor
+         * @method Tree
+         */
+        Tree: require('ui/Tree'),
+
+<span id='bizui-method-Calendar'>        /**
+</span>         * {@link Calendar} constructor
+         * @method Calendar
+         */
+        Calendar: require('ui/Calendar'),
+
+<span id='bizui-method-Table'>        /**
+</span>         * {@link Table} constructor
+         * @method Table
+         */
+        Table: require('ui/Table'),
+
+<span id='bizui-method-TreeTable'>        /**
+</span>         * {@link TreeTable} constructor
+         * @method TreeTable
+         */
+        TreeTable: require('ui/TreeTable')
+    });
+
+    return bizui;
+});</pre>
+</body>
+</html>

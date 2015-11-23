@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * @ignore
+ */
+define(function(require) {
+<span id='Button-method-constructor'><span id='Button'>    /**
+</span></span>     * Button constructor
+     *
+     * &lt;iframe width=&quot;100%&quot; height=&quot;220&quot; src=&quot;//jsfiddle.net/bizdevfe/yaram3jy/3/embedded/result,js,html/&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+     * @constructor
+     * @param {HTMLElement|jQuery} button 目标元素
+     * @param {Object} [options] 参数
+     * @param {String} [options.theme] 主题（dark）
+     * @param {String} [options.label] 文字
+     * @param {Boolean} [options.disabled] 是否禁用
+     */
+    function Button(button, options) {
+        if (button instanceof jQuery) {
+            if (button.length &gt; 0) {
+                button = button[0]; //只取第一个元素
+            } else {
+                return;
+            }
+        }
+
+        if (!isButton(button)) {
+            return;
+        }
+
+<span id='Button-property-main'>        /**
+</span>         * @property {HTMLElement} main `button`元素
+         */
+        this.main = button;
+
+<span id='Button-property-S-main'>        /**
+</span>         * @property {jQuery} $main `button`元素的$包装
+         */
+        this.$main = $(this.main);
+
+        this.options = $.extend({}, options || {});
+        this.init(this.options);
+    }
+
+    var defaultClass = 'biz-button',
+        disableClass = 'biz-button-disable',
+        prefix = 'biz-button-';
+
+    Button.prototype = {
+<span id='Button-method-init'>        /**
+</span>         * 初始化
+         * @param {Object} [options] 参数
+         * @protected
+         */
+        init: function(options) {
+            this.$main.addClass(defaultClass);
+            if (options.theme) {
+                this.$main.addClass(prefix + options.theme);
+            }
+
+            if (options.label) {
+                this.$main.html(options.label);
+            }
+
+            if (options.disabled) {
+                this.disable();
+            }
+        },
+
+<span id='Button-method-enable'>        /**
+</span>         * 激活
+         */
+        enable: function() {
+            this.main.disabled = false;
+            this.$main.removeClass(disableClass);
+        },
+
+<span id='Button-method-disable'>        /**
+</span>         * 禁用
+         */
+        disable: function() {
+            this.main.disabled = true;
+            this.$main.addClass(disableClass);
+        },
+
+<span id='Button-method-destroy'>        /**
+</span>         * 销毁
+         */
+        destroy: function() {
+            this.$main.removeClass(defaultClass + ' ' + disableClass);
+            if (this.options.theme) {
+                this.$main.removeClass(prefix + this.options.theme);
+            }
+        }
+    };
+
+    function isButton(elem) {
+        return elem.nodeType === 1 &amp;&amp; elem.tagName.toLowerCase() === 'button';
+    }
+
+    var dataKey = 'bizButton';
+
+    $.extend($.fn, {
+        bizButton: function(method, options) {
+            var button;
+            switch (method) {
+                case 'enable':
+                    this.each(function() {
+                        button = $(this).data(dataKey);
+                        if (button) {
+                            button.enable();
+                        }
+                    });
+                    break;
+                case 'disable':
+                    this.each(function() {
+                        button = $(this).data(dataKey);
+                        if (button) {
+                            button.disable();
+                        }
+                    });
+                    break;
+                case 'destroy':
+                    this.each(function() {
+                        button = $(this).data(dataKey);
+                        if (button) {
+                            button.destroy();
+                            $(this).data(dataKey, null);
+                        }
+                    });
+                    break;
+                default:
+                    this.each(function() {
+                        if (!$(this).data(dataKey) &amp;&amp; isButton(this)) {
+                            $(this).data(dataKey, new Button(this, method));
+                        }
+                    });
+            }
+
+            return this;
+        }
+    });
+
+    return Button;
+});</pre>
+</body>
+</html>

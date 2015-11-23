@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * @ignore
+ */
+define(function(require) {
+<span id='Input-method-constructor'><span id='Input'>    /**
+</span></span>     * Input constructor
+     *
+     * &lt;iframe width=&quot;100%&quot; height=&quot;200&quot; src=&quot;//jsfiddle.net/bizdevfe/sx74qw4g/1/embedded/result,js,html/&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+     * @constructor
+     * @param {HTMLElement|jQuery} input 目标元素
+     * @param {Object} [options] 参数
+     * @param {Boolean} [options.disabled] 是否禁用
+     * @param {Function} [options.onEnter] 按回车回调(event)
+     */
+    function Input(input, options) {
+        if (input instanceof jQuery) {
+            if (input.length &gt; 0) {
+                input = input[0]; //只取第一个元素
+            } else {
+                return;
+            }
+        }
+
+        if (!isInput(input)) {
+            return;
+        }
+
+<span id='Input-property-main'>        /**
+</span>         * @property {HTMLElement} main `input`元素
+         */
+        this.main = input;
+
+<span id='Input-property-S-main'>        /**
+</span>         * @property {jQuery} $main `input`元素的$包装
+         */
+        this.$main = $(this.main);
+
+        this.options = $.extend({}, options || {});
+        this.init(this.options);
+    }
+
+    var defaultClass = 'biz-input',
+        disableClass = 'biz-input-disable',
+        hoverClass = 'biz-input-hover',
+        focusClass = 'biz-input-focus';
+
+    Input.prototype = {
+<span id='Input-method-init'>        /**
+</span>         * 初始化
+         * @param {Object} [options] 参数
+         * @protected
+         */
+        init: function(options) {
+            this.$main.addClass(defaultClass);
+
+            if (options.disabled) {
+                this.disable();
+            }
+
+            var self = this;
+            this.$main.on('keydown.bizInput', function(e) {
+                if (e.keyCode === 13) {
+                    if (options.onEnter) {
+                        options.onEnter.call(self, e);
+                    }
+                    return false; //阻止IE9, 10触发&lt;button&gt;元素的click事件
+                }
+            });
+
+            this.$main.on('mouseover.bizInput', function(e) {
+                $(this).addClass(hoverClass);
+            }).on('mouseout.bizInput', function(e) {
+                $(this).removeClass(hoverClass);
+            }).on('focus.bizInput', function(e) {
+                $(this).addClass(focusClass);
+            }).on('blur.bizInput', function(e) {
+                $(this).removeClass(focusClass);
+            });
+        },
+
+<span id='Input-method-enable'>        /**
+</span>         * 激活
+         */
+        enable: function() {
+            this.main.disabled = false;
+            this.$main.removeClass(disableClass);
+        },
+
+<span id='Input-method-disable'>        /**
+</span>         * 禁用
+         */
+        disable: function() {
+            this.main.disabled = true;
+            this.$main.addClass(disableClass);
+        },
+
+<span id='Input-method-destroy'>        /**
+</span>         * 销毁
+         */
+        destroy: function() {
+            this.$main.removeClass(defaultClass + ' ' + disableClass);
+            this.$main.off('keydown.bizInput')
+                .off('mouseover.bizInput')
+                .off('mouseout.bizInput')
+                .off('focus.bizInput')
+                .off('blur.bizInput');
+        }
+    };
+
+    function isInput(elem) {
+        return elem.nodeType === 1 &amp;&amp;
+            elem.tagName.toLowerCase() === 'input' &amp;&amp;
+            elem.getAttribute('type').toLowerCase() === 'text';
+    }
+
+    var dataKey = 'bizInput';
+
+    $.extend($.fn, {
+        bizInput: function(method, options) {
+            var input;
+            switch (method) {
+                case 'enable':
+                    this.each(function() {
+                        input = $(this).data(dataKey);
+                        if (input) {
+                            input.enable();
+                        }
+                    });
+                    break;
+                case 'disable':
+                    this.each(function() {
+                        input = $(this).data(dataKey);
+                        if (input) {
+                            input.disable();
+                        }
+                    });
+                    break;
+                case 'destroy':
+                    this.each(function() {
+                        input = $(this).data(dataKey);
+                        if (input) {
+                            input.destroy();
+                            $(this).data(dataKey, null);
+                        }
+                    });
+                    break;
+                default:
+                    this.each(function() {
+                        if (!$(this).data(dataKey) &amp;&amp; isInput(this)) {
+                            $(this).data(dataKey, new Input(this, method));
+                        }
+                    });
+            }
+
+            return this;
+        }
+    });
+
+    return Input;
+});</pre>
+</body>
+</html>
