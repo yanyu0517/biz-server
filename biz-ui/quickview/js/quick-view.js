@@ -79,6 +79,8 @@ $('#add').bizButton().click(function() {
 });
 $('#query').bizButton({
     theme: 'dark'
+}).click(function(){
+    $.post('/query/table.action').done(queryTableCallback));
 });
 
 /**
@@ -198,7 +200,7 @@ var column = [
 //     {id: 800, name: 'H', height: 160, weight: 72.9, age: 27, email: 'h@sogou.com'}
 // ];
 
-$.post('/query/table.action').done(function(data){
+function queryTableCallback(data){
     $('.data').bizTable({
         column: column,
         data: data.table,
@@ -224,7 +226,9 @@ $.post('/query/table.action').done(function(data){
             console.log(data);
         }
     });
-})
+}
+
+$.post('/query/table.action').done(queryTableCallback)
 
 
 
