@@ -80,7 +80,9 @@ $('#add').bizButton().click(function() {
 $('#query').bizButton({
     theme: 'dark'
 }).click(function(){
-    $.post('/query/table.action').done(queryTableCallback));
+    $.post('/query/table.action').done(function(data){
+        $('.data').bizTable('updateData', data)
+    });
 });
 
 /**
@@ -199,7 +201,6 @@ var column = [
 //     {id: 700, name: 'G', height: 168, weight: 75.8, age: 29, email: 'g@sogou.com'},
 //     {id: 800, name: 'H', height: 160, weight: 72.9, age: 27, email: 'h@sogou.com'}
 // ];
-
 function queryTableCallback(data){
     $('.data').bizTable({
         column: column,
