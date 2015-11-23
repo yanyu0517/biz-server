@@ -73,8 +73,6 @@ Mock.prototype.getMockData = function(type, url, req, res, cb) {
                 result = true;
             }
             break;
-        case 'online':
-            break;
         case 'template':
             var data = this.getTemplateData(url);
             if (typeof data != 'undefined') {
@@ -86,6 +84,18 @@ Mock.prototype.getMockData = function(type, url, req, res, cb) {
                 result = true;
             }
             break;
+        default 
+            var data = this.customGetData(url);
+            if (typeof data != 'undefined') {
+                res.writeHead(200, {
+                    'Content-Type': 'application/json'
+                })
+                res.end(data);
+                this.options.logger.request(req, res);
+                result = true;
+            }
+            break;
+
     }
     cb(null, result);
 };
@@ -97,7 +107,7 @@ Mock.prototype.getJsonData = function(url) {
     if (fs.existsSync(pathStr)) {
         var data = fs.readFileSync(pathStr, 'utf-8'),
             json = JSON.parse(data);
-        if (this.options.mockConfig.json.wrap) {
+        if (this.options.mockConfi
             if (json.enable) {
                 return JSON.stringify(json[json.value]);
             }
@@ -120,5 +130,14 @@ Mock.prototype.getTemplateData = function(url) {
         this.options.logger.info("Can't find template data with the path '" + pathStr + "'")
     }
 };
+
+Mock.prototype.customGetData = function(url, type) {
+    try{
+        mockSource = require(type);
+        return mockSource.getData(url);
+    } catch(e) {
+        logger.info("Can't find mock source " + type);
+    }
+}
 
 module.exports = Mock;
