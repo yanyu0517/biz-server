@@ -60,9 +60,10 @@ Mock.prototype.mockTo = function(url, req, res) {
                 //最后一个仍然没有返回数据，那么则返回404
                 res.writeHead(404);
                 res.end('not found');
+                me.options.logger.info("Can't find any data source".red);
             }
         };
-        me.options.logger.info('Datasource is ' + me.options.mockConfig.dataSource[i]);
+        me.options.logger.info('Datasource is ' + me.options.mockConfig.dataSource[i].green);
     }).catch(function(err) {
         res.writeHead(404);
         res.end(err.stack);
@@ -92,7 +93,7 @@ Mock.prototype.getMockData = function(type) {
 
 Mock.prototype.getJsonData = function(type, url, req, res, cb) {
     var pathStr = path.join(process.cwd(), this.options.mockConfig.json.path + url + (this.options.mockConfig.json.suffix || '.json'));
-    this.options.logger.info('Json data path is ' + pathStr);
+    this.options.logger.info('Json data path is ' + pathStr.cyan);
     if (fs.existsSync(pathStr)) {
         fs.readFile(pathStr, 'utf-8', function(err, data){
             if (err) throw cb(err);
@@ -113,7 +114,7 @@ Mock.prototype.getJsonData = function(type, url, req, res, cb) {
 
 Mock.prototype.getTemplateData = function(type, url, req, res, cb) {
     var pathStr = path.join(process.cwd(), this.options.mockConfig.template.path + url + '.template');
-    this.options.logger.info('Template data path is ' + pathStr);
+    this.options.logger.info('Template data path is ' + pathStr.cyan);
     if (fs.existsSync(pathStr)) {
         fs.readFile(pathStr, 'utf-8', function(err, data){
             var mockData = MockJs.mock(new Function('return ' + data)());
@@ -141,16 +142,17 @@ Mock.prototype.getCookiesData = function(type, url, req, res, cb) {
         },
         _this = this,
         req = {};
-    this.options.logger.info('dispatch to ' + options.url);
+    this.options.logger.info('Dispatch to ' + options.url.cyan);
     request(options, function(error, res, body){
         cb(error, body)
     })
 }
 
-Mock.prototype.getCustomData = function(url, req, res, type) {
+Mock.prototype.getCustomData = function(type, url, req, res, cb) {
     try{
-        mockSource = require(type);
-        return mockSource.getData(url, req, res);
+        var mockSource = require(type),
+            action  = url + (this.options.as || '');
+        mockSource.getData(action, req, res, cb);
     } catch(e) {
         logger.info("Can't find mock source " + type);
     }
