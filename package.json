@@ -8,8 +8,7 @@
     "url": "https://github.com/yanyu0517/biz-server.git"
   },
   "scripts": {
-    "start": "node bin/start",
-    "test": "test"
+    "start": "node bin/start"
   },
   "keywords": [
     "biz",
