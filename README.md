@@ -1,5 +1,9 @@
 # biz-server: http server and mock
+
+https://travis-ci.org/yanyu0517/biz-server.svg?branch=master
+
 biz-server是一个命令行http server，并包含了一个mock center。
+
 # 安装 #
 
     npm install biz-server -g 
