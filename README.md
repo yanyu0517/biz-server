@@ -1,6 +1,6 @@
 # biz-server: http server and mock
 
-https://travis-ci.org/yanyu0517/biz-server.svg?branch=master
+[![Build Status](https://travis-ci.org/yanyu0517/biz-server.svg?branch=master)](https://travis-ci.org/yanyu0517/biz-server)
 
 biz-server是一个命令行http server，并包含了一个mock center。
 
