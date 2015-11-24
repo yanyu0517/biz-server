@@ -1,10 +1,10 @@
 {
-    "dataSource": ["template", "json", "online", "qa"],
+    "dataSource": ["template", "json", "cookies"],
     "json": {
         "path": "/mock/data/",
         "wrap": false
     },
-    "online": {
+    "cookies": {
 
     },
     "template": {
