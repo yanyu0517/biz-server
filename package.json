@@ -26,7 +26,6 @@
   ],
   "dependencies": {
     "co": "^4.6.0",
-    "co-request": "^1.0.0",
     "colors": "1.0.3",
     "director": "~1.2.8",
     "fs-extra": "^0.26.2",

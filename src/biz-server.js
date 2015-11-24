@@ -92,7 +92,8 @@ function startBizServer(argv){
     var mock = new Mock({
       as: as,
       mockConfig: mockConfig,
-      logger: logger
+      logger: logger,
+      port: port
     })
   }
   
