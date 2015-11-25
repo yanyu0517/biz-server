@@ -153,7 +153,7 @@ Mock.prototype.getCustomData = function(type, url, req, res, cb) {
             action  = url + (this.options.as || '');
         mockSource.getData(action, req, res, cb);
     } catch(e) {
-        logger.info("Can't find mock source " + type);
+        this.options.logger.info("Can't find mock source " + type);
     }
 };
 
