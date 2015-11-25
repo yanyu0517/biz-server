@@ -83,7 +83,6 @@ function startBizServer(argv){
   try{
     mockConfig = require(mockPath);
   } catch(e) {
-    var pathStr = 
     logger.info("Can't find mock config file " + mockPath + ", mock feature isn't available");
   }
 
@@ -94,7 +93,7 @@ function startBizServer(argv){
       mockConfig: mockConfig,
       logger: logger,
       port: port
-    })
+    });
   }
   
 
