@@ -78,9 +78,27 @@ wrap，数据外层是否被包裹（兼容处理）
 	    "success": {}
     }
 2.template
+
 template是通过数据模板生成模拟数据
 
 生成器选用[http://mockjs.com/](http://mockjs.com/ "Mock.js")
+
+3.cookies
+
+cookies是通过在配置文件中拷贝cookies，实现免登陆直接请求数据
+
+配置文件如下：
+
+    "cookies": {
+	    "host": ,
+	    "rejectUnauthorized": ,
+	    "secureProtocol": ,
+	    "cookies": 
+    }
+
+- host：访问域名，支持http和https
+- reject
+
 
 json和template路径与请求路径一致，例：
 
@@ -94,13 +112,16 @@ template路径/mock/data/query/table.template
 
 mock数据源实现getData方法
 
-    exports.getData = function(url){
+    exports.getData = function(action, req, res, cb){
     	return data
     }
 
 方法参数：
 
-- url：请求数据路径
+- action：请求数据路径
+- req: request
+- res: response
+- cb: biz-server采用co控制异步操作的流程，自定义数据源会被thunkify，cb是co的回调函数，`cb(error, data)`
 
 方法返回：
 
