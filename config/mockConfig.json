@@ -5,7 +5,10 @@
         "wrap": false
     },
     "cookies": {
-
+        "host": "",
+        "rejectUnauthorized": false,
+        "secureProtocol": "SSLv3_method",
+        "cookies": ""
     },
     "template": {
         "path": "/mock/template/"
