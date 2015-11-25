@@ -1,5 +1,8 @@
 # biz-server: http server and mock
 
+[![NPM version](https://img.shields.io/npm/v/biz-server.svg)](https://www.npmjs.com/package/biz-server)
+[![NPM downloads total](https://img.shields.io/npm/dt/biz-server.svg)](https://www.npmjs.com/package/biz-server)
+[![NPM license](https://img.shields.io/npm/l/biz-server.svg)](https://www.npmjs.com/package/biz-server)
 [![Build Status](https://travis-ci.org/yanyu0517/biz-server.svg?branch=master)](https://travis-ci.org/yanyu0517/biz-server)
 [![Dependency Status](https://david-dm.org/yanyu0517/biz-server.svg)](https://david-dm.org/yanyu0517/biz-server)
 [![devDependency Status](https://david-dm.org/yanyu0517/biz-server/dev-status.svg)](https://david-dm.org/yanyu0517/biz-server#info=devDependencies)
