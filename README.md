@@ -18,11 +18,14 @@ biz-server是一个命令行http server，并包含了一个mock center。
 # 使用 #
 ## http server功能 ##
 
-
     biz-server [path] [options]
 
-- path：如果没有指定path，那么则认为是当前目录，推荐不指定path，使用当前目录
-- options：biz-server的http功能是基于[https://github.com/indexzero/http-server](https://github.com/indexzero/http-server "http-server")实现的，能够接受所有http-serverde参数
+or
+
+	bs [path] [options]
+
+`path`：如果没有指定path，那么则认为是当前目录，推荐不指定path，使用当前目录
+`options`：biz-server的http功能是基于[https://github.com/indexzero/http-server](https://github.com/indexzero/http-server "http-server")实现的，能够接受所有http-serverde参数
 
 `-p` Port to use (defaults to 8080)
 
