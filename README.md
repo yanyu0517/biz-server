@@ -20,10 +20,49 @@ biz-server是一个命令行http server，并包含了一个mock center。
 
 
     biz-server [path] [options]
-如果没有指定path，那么则认为是当前目录
 
-推荐不指定path，使用当前目录
+- path：如果没有指定path，那么则认为是当前目录，推荐不指定path，使用当前目录
+- options：biz-server的http功能是基于[https://github.com/indexzero/http-server](https://github.com/indexzero/http-server "http-server")实现的，能够接受所有http-serverde参数
 
+`-p` Port to use (defaults to 8080)
+
+`-a` Address to use (defaults to 0.0.0.0)
+
+`-d` Show directory listings (defaults to 'True')
+
+`-i` Display autoIndex (defaults to 'True')
+
+`--as` be filterd ajax request suffix, comma separated  (defaults to '.action')
+
+`-m` or `--mock` mock config path  (defaults to cwd() + /config/mockConfig])
+
+`-e` or `--ext` Default file extension if none supplied (defaults to 'html')
+
+`-s` or `--silent` Suppress log messages from output
+
+`--cors` Enable CORS via the `Access-Control-Allow-Origin` header
+
+`-o` Open browser window after starting the server
+
+`-c` Set cache time (in seconds) for cache-control max-age header, e.g. -c10 for 10 seconds (defaults to '3600'). To disable caching, use -c-1.
+
+`-U` or `--utc` Use UTC time format in log messages.
+
+`-P` or `--proxy` Proxies all requests which can't be resolved locally to the given url. e.g.: -P http://someurl.com
+
+`-S` or `--ssl` Enable https.
+
+`-C` or `--cert` Path to ssl cert file (default: cert.pem).
+
+`-K` or `--key` Path to ssl key file (default: key.pem).
+
+`-r` or `--robots` Provide a /robots.txt (whose content defaults to 'User-agent: *\nDisallow: /')
+
+`-h` or `--help` Print this list and exit.
+
+`-v` or `--version` Print the version.
+
+	
 ## mock功能 ##
 step1:
 

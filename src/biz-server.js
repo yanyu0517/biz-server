@@ -20,7 +20,7 @@ function startBizServer(argv){
       '  -a           Address to use [0.0.0.0]',
       '  -d           Show directory listings [true]',
       '  -i           Display autoIndex [true]',
-      '  -as --actionSuffix   be filterd ajax request suffix, comma separated  [.action]',
+      '  --as         filterd ajax request suffix, comma separated  [.action]',
       '  -m --mock    mock config path  [cwd() + /config/mockConfig]',
       '  -e --ext     Default file extension if none supplied [none]',
       '  -s --silent  Suppress log messages from output',
@@ -38,7 +38,8 @@ function startBizServer(argv){
       '  -K --key     Path to ssl key file (default: key.pem).',
       '',
       '  -r --robots  Respond to /robots.txt [User-agent: *\\nDisallow: /]',
-      '  -h --help    Print this list and exit.'
+      '  -h --help    Print this list and exit.',
+      '  -v --version Print the version.' 
     ].join('\n'));
     process.exit();
   }

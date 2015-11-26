@@ -36,7 +36,7 @@ if(argv.init !== void 0){
     default:
         break;
     }
-} else if(argv.v) {
+} else if(argv.v || argv.version) {
     console.log(server.version)
 } else {
     start(argv);
