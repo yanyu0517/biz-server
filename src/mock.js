@@ -32,7 +32,6 @@ Mock.prototype.initRouter = function() {
             var reg = '/(.*)' + suffix[i],
                 me = this;
             function callback(url){
-                console.log(url)
                 if (mockConfig) {
                     me.mockTo.call(me, url, this.req, this.res);
                 }
@@ -52,7 +51,6 @@ Mock.prototype.mockTo = function(url, req, res) {
     co(function*() {
         for (var i = 0; i < me.options.mockConfig.dataSource.length; i++) {
             var method = me.getMockData(me.options.mockConfig.dataSource[i]);
-            console.log(method)
             var data = yield method.call(me, me.options.mockConfig.dataSource[i], url, req, res);
             if (typeof data !== 'undefined') {
                 res.writeHead(200, {
