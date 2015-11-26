@@ -17,7 +17,7 @@ function Mock(options) {
 
     this.thunkGetJsonData = thunkify(this.getJsonData);
     this.thunkGetTemplateData = thunkify(this.getTemplateData);
-    this.thunkGetCookiesData = thunkify(this.getCookiesData);
+    this.thunkGetCookieData = thunkify(this.getCookieData);
     this.thunkGetCustomData = thunkify(this.getCustomData);
 }
 
@@ -31,11 +31,14 @@ Mock.prototype.initRouter = function() {
         for (var i = 0; i < suffix.length; i++) {
             var reg = '/(.*)' + suffix[i],
                 me = this;
-            router.post(new RegExp(reg), function(url) {
+            function callback(url){
+                console.log(url)
                 if (mockConfig) {
                     me.mockTo.call(me, url, this.req, this.res);
                 }
-            });
+            }
+            router.post(new RegExp(reg), callback);
+            router.get(new RegExp(reg), callback);
         }
     }
 };
@@ -49,6 +52,7 @@ Mock.prototype.mockTo = function(url, req, res) {
     co(function*() {
         for (var i = 0; i < me.options.mockConfig.dataSource.length; i++) {
             var method = me.getMockData(me.options.mockConfig.dataSource[i]);
+            console.log(method)
             var data = yield method.call(me, me.options.mockConfig.dataSource[i], url, req, res);
             if (typeof data !== 'undefined') {
                 res.writeHead(200, {
@@ -81,8 +85,8 @@ Mock.prototype.getMockData = function(type) {
         case 'template':
             method = this.thunkGetTemplateData;
             break;
-        case 'cookies':
-            method = this.thunkGetCookiesData;
+        case 'cookie':
+            method = this.thunkGetCookieData;
             break;
         default:
             method = this.thunkGetCustomData;
@@ -127,8 +131,8 @@ Mock.prototype.getTemplateData = function(type, url, req, res, cb) {
     }
 };
 
-Mock.prototype.getCookiesData = function(type, url, req, res, cb) {
-    var configs = this.options.mockConfig.cookies,
+Mock.prototype.getCookieData = function(type, url, req, res, cb) {
+    var configs = this.options.mockConfig.cookie,
         port = this.options.port || configs.port,
         options = {
             method: req.method || 'post',
@@ -136,7 +140,7 @@ Mock.prototype.getCookiesData = function(type, url, req, res, cb) {
             url: configs.host + url + (this.options.as || ''),
             port: port,
             headers: {
-                'Cookie': configs.cookies,
+                'Cookie': configs.cookie,
             },
             rejectUnauthorized: !!configs.rejectUnauthorized,
             secureProtocol: configs.secureProtocol || ''

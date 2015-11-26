@@ -18,13 +18,17 @@ function initMock(){
     console.log('copy ' + src + ' to ' + process.cwd())
     // 复制目录
     fse.copy(src, process.cwd() + '/config', function(err){
-        console.error(err)
+        if(err){
+            console.error(err);
+        }
     } );
     src = path.join(__dirname, '../mock');
     console.log('copy ' + src + ' to ' + process.cwd() + '/mock');
     // 复制目录
     fse.copy(src, process.cwd() + '/mock', function(err){
-        console.error(err)
+        if(err){
+            console.error(err);
+        }
     } );
 }
 if(argv.init !== void 0){

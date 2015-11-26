@@ -25,7 +25,7 @@ or
 	bs [path] [options]
 
 `path`：如果没有指定path，那么则认为是当前目录，推荐不指定path，使用当前目录
-`options`：biz-server的http功能是基于[https://github.com/indexzero/http-server](https://github.com/indexzero/http-server "http-server")实现的，能够接受所有http-serverde参数
+`options`：biz-server的http功能是基于[https://github.com/indexzero/http-server](https://github.com/indexzero/http-server "http-server")实现的，能够接受所有http-server的参数
 
 `-p` Port to use (defaults to 8080)
 
@@ -128,17 +128,17 @@ template是通过数据模板生成模拟数据
 
 生成器选用[http://mockjs.com/](http://mockjs.com/ "Mock.js")
 
-3.cookies
+3.cookie
 
-cookies是通过在配置文件中拷贝cookies，实现免登陆直接请求数据
+cookie是通过在配置文件中拷贝cookie，实现免登陆直接请求数据
 
 配置文件如下：
 
-    "cookies": {
+    "cookie": {
 	    "host": ,
 	    "rejectUnauthorized": ,
 	    "secureProtocol": ,
-	    "cookies": 
+	    "cookie": 
     }
 
 - host：访问域名，支持http和https
