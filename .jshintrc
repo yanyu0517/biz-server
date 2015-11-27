@@ -8,5 +8,6 @@
   "unused":    true,
   "onecase":   true,
   "lastsemic": true,
-  "esnext": true
+  "esnext": true,
+  "quotmark": false
 }
