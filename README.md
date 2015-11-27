@@ -72,6 +72,7 @@ demo以biz-ui为基础，演示了如何通过biz-server启动web服务，并使
         ]  
     }
 
+点击query按钮，下方列表中的数据会根据模版随机生成数据
 
 ## demo演示
 
