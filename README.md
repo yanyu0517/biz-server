@@ -99,81 +99,9 @@ mock配置文件如下:
 	    }
     }
 
-### mock数据源 ###
+mock配置文件请参考biz-mock
 
-目前提供了两种数据源;
-
-1.json
-
-json是静态数据源
-
-    "json": {
-    	"path": "/mock/data/",
-   		"wrap": false
-    }
-
-path：静态数据源文件目录
-
-wrap，数据外层是否被包裹（兼容处理）
-
-包裹格式：
-
-    {
-	    "enabled": true,
-	    "value": "success",
-	    "success": {}
-    }
-2.template
-
-template是通过数据模板生成模拟数据
-
-生成器选用[http://mockjs.com/](http://mockjs.com/ "Mock.js")
-
-3.cookie
-
-cookie是通过在配置文件中拷贝cookie，实现免登陆直接请求数据
-
-配置文件如下：
-
-    "cookie": {
-	    "host": ,
-	    "rejectUnauthorized": ,
-	    "secureProtocol": ,
-	    "cookie": 
-    }
-
-- host：访问域名，支持http和https
-- reject
-
-
-json和template路径与请求路径一致，例：
-
-请求:/query/table.action
-
-json路径/mock/data/query/table.json
-
-template路径/mock/data/query/table.template
-
-### 如何自定义mock数据源 ###
-
-mock数据源实现getData方法
-
-    exports.getData = function(action, req, res, cb){
-    	return data
-    }
-
-方法参数：
-
-- action：请求数据路径
-- req: request
-- res: response
-- cb: biz-server采用co控制异步操作的流程，自定义数据源会被thunkify，cb是co的回调函数，`cb(error, data)`
-
-方法返回：
-
-- json数据
-
-另外需要在config/mockConfig.json的dataSource注册mock数据源
+[https://github.com/yanyu0517/biz-mock#mockconfig](https://github.com/yanyu0517/biz-mock#mockconfig)
 
 # demo #
 [https://github.com/yanyu0517/biz-server/tree/gh-pages](https://github.com/yanyu0517/biz-server/tree/gh-pages)
