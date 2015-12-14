@@ -1,6 +1,6 @@
 {
   "name": "biz-server",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "biz mock server",
   "main": "/src/biz-server.js",
   "repository": {
@@ -25,17 +25,13 @@
     }
   ],
   "dependencies": {
+    "biz-mock": "0.0.1",
     "co": "^4.6.0",
     "colors": "1.0.3",
-    "director": "~1.2.8",
-    "fs-extra": "^0.26.2",
     "http-server": "^0.8.5",
-    "mockjs": "^0.1.10",
     "opener": "~1.4.0",
     "optimist": "0.6.x",
-    "portfinder": "0.4.x",
-    "request": "^2.67.0",
-    "thunkify": "^2.1.2"
+    "portfinder": "0.4.x"
   },
   "preferGlobal": "true",
   "bin": {
