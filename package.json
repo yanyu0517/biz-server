@@ -1,6 +1,6 @@
 {
   "name": "biz-server",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "biz mock server",
   "main": "/src/biz-server.js",
   "repository": {
@@ -25,7 +25,7 @@
     }
   ],
   "dependencies": {
-    "biz-mock": "0.0.1",
+    "biz-mock": "0.0.2",
     "co": "^4.6.0",
     "colors": "1.0.3",
     "http-server": "^0.8.5",
