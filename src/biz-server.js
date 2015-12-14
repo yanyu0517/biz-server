@@ -7,7 +7,7 @@ function startBizServer(argv) {
     path = require('path'),
     portfinder = require('portfinder'),
     opener = require('opener'),
-    mock = require('./mock');
+    mock = require('biz-mock');
 
   var ifaces = os.networkInterfaces();
 
@@ -91,9 +91,7 @@ function startBizServer(argv) {
   if (mockConfig) {
     mock.start({
       as: as,
-      mockConfig: mockConfig,
-      logger: logger,
-      port: port
+      mockConfig: mockConfig
     })
   }
 

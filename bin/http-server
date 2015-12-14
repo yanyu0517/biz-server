@@ -3,6 +3,7 @@
 'use strict';
 
 var server = require('../src/biz-server'),
+    mock = require('biz-mock'),
     fs = require('fs'),
     fse = require('fs-extra'),
     path = require('path'),
@@ -35,7 +36,7 @@ if(argv.init !== void 0){
     switch(argv.init){
     //初始化mock
     case 'mock':
-        initMock();
+        mock.initFolder();
         break;
     default:
         break;

@@ -6,6 +6,7 @@
 [![Build Status](https://travis-ci.org/yanyu0517/biz-server.svg?branch=master)](https://travis-ci.org/yanyu0517/biz-server)
 [![Dependency Status](https://david-dm.org/yanyu0517/biz-server.svg)](https://david-dm.org/yanyu0517/biz-server)
 [![devDependency Status](https://david-dm.org/yanyu0517/biz-server/dev-status.svg)](https://david-dm.org/yanyu0517/biz-server#info=devDependencies)
+[![bitHound Overalll Score](https://www.bithound.io/github/yanyu0517/biz-server/badges/score.svg)](https://www.bithound.io/github/yanyu0517/biz-server)
 
 biz-server是一个命令行http server，并包含了一个mock center。
 
