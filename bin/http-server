@@ -4,9 +4,6 @@
 
 var server = require('../src/biz-server'),
     mock = require('biz-mock'),
-    fs = require('fs'),
-    fse = require('fs-extra'),
-    path = require('path'),
     argv = require('optimist')
     .boolean('cors')
     .argv;
@@ -14,24 +11,6 @@ function start(options){
 	server.startBizServer(options)
 }
 
-function initMock(){
-    var src = path.join(__dirname, '../config');
-    console.log('copy ' + src + ' to ' + process.cwd())
-    // 复制目录
-    fse.copy(src, process.cwd() + '/config', function(err){
-        if(err){
-            console.error(err);
-        }
-    } );
-    src = path.join(__dirname, '../mock');
-    console.log('copy ' + src + ' to ' + process.cwd() + '/mock');
-    // 复制目录
-    fse.copy(src, process.cwd() + '/mock', function(err){
-        if(err){
-            console.error(err);
-        }
-    } );
-}
 if(argv.init !== void 0){
     switch(argv.init){
     //初始化mock
