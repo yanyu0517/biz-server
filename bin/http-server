@@ -7,6 +7,9 @@ var server = require('../src/biz-server'),
     argv = require('optimist')
     .boolean('cors')
     .argv;
+
+argv.root = argv._[0];
+
 function start(options){
 	server.startBizServer(options)
 }

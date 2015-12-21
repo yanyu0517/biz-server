@@ -30,8 +30,7 @@
     "colors": "1.0.3",
     "http-server": "^0.8.5",
     "opener": "~1.4.0",
-    "optimist": "0.6.x",
-    "portfinder": "0.4.x"
+    "optimist": "0.6.x"
   },
   "preferGlobal": "true",
   "bin": {
@@ -42,5 +41,9 @@
     "url": "https://github.com/yanyu0517/biz-server/issues"
   },
   "author": "yanyu <yanyu0517@126.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "istanbul": "^0.4.1",
+    "vows": "^0.8.1"
+  }
 }
