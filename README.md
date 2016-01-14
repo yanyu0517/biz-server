@@ -10,6 +10,9 @@
 
 biz-server是一个命令行http server，并包含了一个mock center。
 
+
+[![NPM Stat](https://nodei.co/npm/biz-server.png?downloads=true)](https://nodei.co/npm/biz-server)
+
 # 安装 #
 
     npm install biz-server -g 
