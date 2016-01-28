@@ -2,7 +2,7 @@
   "name": "biz-server",
   "version": "0.1.9",
   "description": "biz mock server",
-  "main": "/src/biz-server.js",
+  "main": "src/biz-server.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/yanyu0517/biz-server.git"
