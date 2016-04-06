@@ -87,7 +87,7 @@ step3:
 
 在启动时，增加mock参数，指定mock功能的配置文件
 
-    -m --mockmock config path  [cwd() + /config/mockConfig]
+    -m your config path  [cwd() + /config/mockConfig]
 
 mock配置文件如下:
 

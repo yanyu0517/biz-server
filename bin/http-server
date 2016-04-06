@@ -58,7 +58,8 @@ function start(argv) {
         proxy: proxy,
         host: host,
         m: argv.m || argv.mock,
-        port: port || 8080
+        port: port || 8080,
+        as: as
     };
     if (argv.cors) {
         options.cors = true;

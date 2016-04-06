@@ -1,6 +1,6 @@
 {
   "name": "biz-server",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "biz mock server",
   "main": "src/biz-server.js",
   "repository": {

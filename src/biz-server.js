@@ -38,7 +38,6 @@ function startServer(options, callback) {
             root: configs.root
         });
     }
-    console.log(configs)
     server = httpServer.createServer(configs);
     server.listen(configs.port, configs.host || '0.0.0.0', callback);
 
