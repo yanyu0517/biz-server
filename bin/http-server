@@ -113,7 +113,7 @@ if (argv.init !== void 0) {
     switch (argv.init) {
         //初始化mock
         case 'mock':
-            server.initFolder();
+            BizServer.initFolder();
             process.exit();
             break;
         default:
@@ -121,6 +121,7 @@ if (argv.init !== void 0) {
             break;
     }
 } else if (argv.v || argv.version) {
+    console.log(123)
     console.log(BizServer.version);
     process.exit();
 } else if (argv.h || argv.help) {
