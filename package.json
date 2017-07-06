@@ -25,7 +25,7 @@
     }
   ],
   "dependencies": {
-    "biz-mock": "0.0.3",
+    "biz-mock": "^0.0.4",
     "co": "^4.6.0",
     "colors": "1.0.3",
     "extend": "^3.0.0",
